@@ -5,9 +5,12 @@ let apiKey = "b8ecb570e32c2e5042581abd004b71bb";
 
 // Forloop for persisting the data onto HMTL page
 for (var i = 0; i < localStorage.length; i++) {
+    
+    // Creates city list with local storage
+    var city = localStorage.getItem(i);
+    var cityName = $(".list-group").addClass("list-group-item");
 
-    // console.log(localStorage.getItem("City"));
-    console.log(localStorage.getItem(i));
+    cityName.append("<li>" + city + "</li>");
 }
 // Key count for local storage 
 let keyCount = 0;
