@@ -3,8 +3,11 @@ let searchButton = $(".searchButton");
 
 let apiKey = "b8ecb570e32c2e5042581abd004b71bb";
 
+// Forloop for persisting the data onto HMTL page
 for (var i = 0; i < localStorage.length; i++) {
 
+    // console.log(localStorage.getItem("City"));
+    console.log(localStorage.getItem(i));
 }
 // Key count for local storage 
 let keyCount = 0;
@@ -15,7 +18,9 @@ searchButton.click(function () {
 
     // Variable for current weather working 
     let urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + searchInput + "&Appid=" + apiKey + "&units=imperial";
-    
+    // Variable for 5 day forecast working
+    let urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchInput + "&Appid=" + apiKey + "&units=imperial";
+
 
     if (searchInput == "") {
         console.log(searchInput);
@@ -65,11 +70,31 @@ searchButton.click(function () {
                 let currentUV = currentTemp.append("<p>" + "UV Index: " + response.value + "</p>").addClass("card-text");
                 currentUV.addClass("UV");
                 currentTemp.append(currentUV);
-                // currentUV.append("UV Index: " + response.value); 
+                // currentUV.append("UV Index: " + response.value);
             });
 
-        })
+        });
+
+        // Start call for 5-day forecast 
+        $.ajax({
+            url: urlFiveDay,
+            method: "GET"
+        }).then(function (response) {
+            // Array for 5-days 
+            let day = [0, 8, 16, 24, 32];
+            let fiveDayCard = $(".fiveDayCard").addClass("card-body");
+            let fiveDayDiv = $(".fiveDayOne").addClass("card-text");
+            fiveDayDiv.empty();
+            // For each for 5 days
+            day.forEach(function (i) {
+                let FiveDayTimeUTC1 = new Date(response.list[i].dt * 1000);
+                FiveDayTimeUTC1 = FiveDayTimeUTC1.toLocaleDateString("en-US");
+
+                fiveDayDiv.append("<div class=fiveDayColor>" + "<p>" + FiveDayTimeUTC1 + "</p>" + `<img src="https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png">` + "<p>" + "Temperature: " + response.list[i].main.temp + "</p>" + "<p>" + "Humidity: " + response.list[i].main.humidity + "%" + "</p>" + "</div>");
+
+
+            })
+
+        });
     }
-
 });
-

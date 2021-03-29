@@ -4,7 +4,7 @@ Homework-6 Weather Dashboard
 Noah Harbison
 
 *
-    * 'weather-dashboard - Github'
+    * <a href>'weather-dashboard - Github'</a>
     * 'weather-dashboard - Github IO'
 *
 
