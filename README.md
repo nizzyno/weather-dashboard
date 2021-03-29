@@ -5,7 +5,7 @@ Noah Harbison
 
 *
     * <a href="https://github.com/nizzyno/weather-dashboard">'weather-dashboard - Github'</a>
-    * 'weather-dashboard - Github IO'
+    * <a href="https://nizzyno.github.io/weather-dashboard/">'weather-dashboard - Github IO'</a>
 *
 
 ## Summary
